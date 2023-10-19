@@ -1,0 +1,24 @@
+
+#sidebar a{
+    color: black;
+    border: none;
+    background-color: transparent;
+    
+
+}
+#sidebar a :hover{
+    color: white;
+    
+     font-weight: bolder;
+}
+#sidebar a.active{
+    color: black;
+    font-weight: bolder;
+    
+    text-decoration: underline;
+
+    border: none;
+    background-color: transparent;
+
+
+}
