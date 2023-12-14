@@ -22,7 +22,7 @@ console.log(product);
 
 // send data to server
 
-fetch('http://localhost:5001/addproduct',
+fetch('https://brand-shop-server-gamma-two.vercel.app/addproduct',
 {
 method: 'POST',
 headers: { 
@@ -42,6 +42,7 @@ body: JSON.stringify(product)
             confirmButtonText: 'Cool'
           })
     }
+    form.reset()
 })
     }
     return (

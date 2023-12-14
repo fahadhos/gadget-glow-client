@@ -8,13 +8,12 @@ const ErrorPage = () => {
   return (
 
     <div
-
     className="grid place-content-center bg-black text-center text-white h-[40rem]"
   
     >
         
     <Helmet>
-        <title> | 404 Error</title>
+        <title>GadgetGlow | 404 Error</title>
     </Helmet>
       <div className='relative -top-10 text-2xl'>
 

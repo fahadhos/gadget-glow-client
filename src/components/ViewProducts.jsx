@@ -3,12 +3,17 @@ import { useLoaderData } from "react-router-dom";
 import { Navbar } from './../shared/Navbar';
 import {AiFillStar} from 'react-icons/ai'
  import { Link } from "react-router-dom";
+import BrandBanner from './BrandBanner';
+
+
 const ViewProducts = () => {
 
-const brandProducts = useLoaderData()
+const product = useLoaderData()
 
 
-// console.log(brandProducts.length);
+const brandProducts = product.product
+
+// console.log(product.product);
     return (
         <div>
             <Navbar></Navbar>
@@ -19,9 +24,9 @@ const brandProducts = useLoaderData()
 
 <section>
 
-
+<BrandBanner></BrandBanner>
 </section>
-           <section className="py-10 font-poppin">
+     <section className="py-10 font-poppin">
      {brandProducts.length == 0 ?   <><h2 className="capitalize text-3xl font-rancho text-center">
 Not Available </h2></> : <h2 className='capitalize text-3xl font-rancho text-center  ' >
   {'Available '+ brandProducts[0]?.brandname + ' Products'}        
@@ -48,7 +53,7 @@ Sorry!! Products are not available at the moment  </h2>
     <p className="capitalize text-sm"> <b>Brand: </b> { product?.brandname}</p>
       <p className=" text-sm"> <b>Price: </b>  <span className="text-red-500 font-bold ">{ product?.price} </span>  $</p>
   <p className="text-sm flex items-center "> <b>Rating: </b> 
-  {Array(Number(product.rating)).fill().map((_, index) => (
+  {Array(Number(product?.rating)).fill().map((_, index) => (
     <AiFillStar className="text-xl text-yellow-400" key={index}></AiFillStar>
   ))}
    
@@ -62,7 +67,7 @@ Sorry!! Products are not available at the moment  </h2>
           bg-gradient-to-t
           hover:from-green-400 hover:to-blue-500 from-green-500 to-yellow-300 
  ">Details</button> </Link>
-    <Link to={`/update/${product._id}`}>
+    <Link to={`/update/${product?._id}`}>
      <button className="btn  capitalize 
           text-white rounded-full hover:rounded-lg
           bg-gradient-to-t

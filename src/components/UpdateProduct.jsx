@@ -24,7 +24,7 @@ console.log(product);
 
 // send data to server
 
-fetch(`http://localhost:5001/addproduct/update/${loadedProduct._id}`,
+fetch(`https://brand-shop-server-gamma-two.vercel.app/addproduct/update/${loadedProduct?._id}`,
 {
 method: 'PUT',
 headers: { 

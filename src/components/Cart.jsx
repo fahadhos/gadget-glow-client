@@ -1,14 +1,19 @@
  
 import { useLoaderData, Link } from 'react-router-dom';
 import { Navbar } from './../shared/Navbar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {AiFillDelete} from 'react-icons/ai'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';  
+import { AuthContext } from '../Providers/AuthProvider';
 const Cart = () => {
- 
- const loadedcarts = useLoaderData()
 
-const [carts, setCart]= useState(loadedcarts)
+ const {user}=useContext(AuthContext)
+ const loadedcarts = useLoaderData()
+ const filteredCarts = loadedcarts.filter(
+  // cartItem.id is actually a user email id
+  cartItem => cartItem.id === user.email);
+console.log(filteredCarts)
+const [carts, setCart]= useState(filteredCarts)
 console.log(carts);
 const handeleDelete=(_id)=>{
     Swal.fire({
@@ -20,14 +25,14 @@ const handeleDelete=(_id)=>{
         cancelButtonText: 'No, cancel',
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:5001/cart/${_id}`, {
+            fetch(`https://brand-shop-server-gamma-two.vercel.app/cart/${_id}`, {
                 method: 'DELETE',
             })
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
                     if (data.deletedCount > 0) {
-                        const remaining = carts.filter((cart) => cart._id !== _id);
+                        const remaining = carts.filter((cart) => cart?._id !== _id);
                         setCart(remaining);
                     }
                 });
@@ -58,12 +63,12 @@ const handeleDelete=(_id)=>{
       {
       carts.map(cart=> <>
        <tr>
-        <th><img className='bg-cover bg-center  h-[2rem] rounded' src={cart.image} alt="" /></th>
-        <td>{cart.name}</td>
-        <td>{cart.price}</td>
+        <th><img className='bg-cover bg-center  h-[2rem] rounded' src={cart?.image} alt="" /></th>
+        <td>{cart?.name}</td>
+        <td>{cart?.price}</td>
         <td> 
    
-             <button onClick={()=>handeleDelete(cart._id)}
+             <button onClick={()=>handeleDelete(cart?._id)}
               className='
               btn  capitalize
               text-white
